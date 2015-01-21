@@ -1,4 +1,7 @@
-#Makefile for tomasulo
+# Makefile for Tomasulo algorithm simulator
+# Copyright (C) 2014-2015 Wen Wen (wew55@pitt.edu),
+#                         Joydeep Rakshit (jor73@pitt.edu),
+#                         Lu Zhang (luz14@pitt.edu)
 
 PROG = tomasulo
 OUTPUT_PREFIX = ./bin/
