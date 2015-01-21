@@ -56,12 +56,13 @@ void LD_ST_QUEUE::add_entry(int_vec_t int_rat, int_vec_t fp_rat, int_vec_t int_a
 	temp.st_rob_pos=-1;
     	temp.inst_index = _inst_index;
     	temp.fwd_match=false;
-    if(i_entry.inst_type == LD){ // if the instruction is a LD
+    	
+    	if(i_entry.inst_type == LD){ // if the instruction is a LD
 
-	temp.type = i_entry.inst_type;
+		temp.type = i_entry.inst_type;
 
-	temp.tag2=int_rat[actual_source2];  // this is for the register used for address calculation
-	temp.rob_dest=actual_dest; //fp_rat[actual_dest];  // gets the destination address from the ROB, i.e where in the ROB the value is to be sent
+		temp.tag2=int_rat[actual_source2];  // this is for the register used for address calculation
+		temp.rob_dest=actual_dest; //fp_rat[actual_dest];  // gets the destination address from the ROB, i.e where in the ROB the value is to be sent
 
 
 	if (int_rat[actual_source2]==-1){
@@ -72,17 +73,17 @@ void LD_ST_QUEUE::add_entry(int_vec_t int_rat, int_vec_t fp_rat, int_vec_t int_a
 	else
 		temp.value2=0;
 
-    temp.forward_ready = false;
-    temp.commit_ready = false;
-    temp.committed = false;
-    temp.result = 0; // value to be obtained from the memory and sent to ROB
-    temp.addr = -1;
-    temp.penalty = _config.mem_cycle_of_ldst;
-    temp.penalty_assigned=false;
-    temp.addr_calc = false;
-    temp.mem_access=false;
-    lsq[entry_count]=temp;
-    entry_count++;
+    	temp.forward_ready = false;
+    	temp.commit_ready = false;
+    	temp.committed = false;
+    	temp.result = 0; // value to be obtained from the memory and sent to ROB
+    	temp.addr = -1;
+    	temp.penalty = _config.mem_cycle_of_ldst;
+    	temp.penalty_assigned=false;
+    	temp.addr_calc = false;
+    	temp.mem_access=false;
+    	lsq[entry_count]=temp;
+    	entry_count++;
     }
     else{//if ST
 
@@ -104,17 +105,17 @@ void LD_ST_QUEUE::add_entry(int_vec_t int_rat, int_vec_t fp_rat, int_vec_t int_a
 	else
 		temp.result=-1;
 
-    temp.forward_ready = false;
-    temp.commit_ready = false;
-    temp.committed = false;
-    temp.addr =-1;
-    temp.penalty = 0;
-    temp.penalty_assigned=false;
-    temp.addr_calc = false;
-    temp.mem_access=false;
-    lsq[entry_count]=temp;
+	temp.forward_ready = false;
+    	temp.commit_ready = false;
+    	temp.committed = false;
+    	temp.addr =-1;
+    	temp.penalty = 0;
+    	temp.penalty_assigned=false;
+    	temp.addr_calc = false;
+    	temp.mem_access=false;
+    	lsq[entry_count]=temp;
 
-    entry_count++;
+    	entry_count++;
 
     }
 
@@ -325,14 +326,14 @@ void LD_ST_QUEUE::commit(int rob_pos){
 
 void LD_ST_QUEUE::delete_entry(){
 
-		if (pos!=-1){//&& lsq[pos].type==LD){
+	if (pos!=-1){//&& lsq[pos].type==LD){
 
-	//lsq.erase(lsq.begin()+pos);
-    for (int i=pos; i<(entry_count-1); i++){
-        lsq[i]=lsq[i+1];}
-	pos=-1;
-	entry_count--;
-	//lsq.resize(qsize);
+		//lsq.erase(lsq.begin()+pos);
+    		for (int i=pos; i<(entry_count-1); i++){
+        	lsq[i]=lsq[i+1];}
+		pos=-1;
+		entry_count--;
+		//lsq.resize(qsize);
 	}
 
 }
