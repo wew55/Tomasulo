@@ -39,7 +39,7 @@ bool RS::check_clear(){
 
 	if (entry_count <= rs_capacity)
 		ret_value=true;
-	return ret_value;
+		return ret_value;
 }
 
 void RS::add_entry (int_vec_t RAT, int_vec_t ARF, INST i_entry, int curr_cycle, int i_num){ // function takes ARF, RAT and the instruction to be inserted as input
@@ -188,28 +188,3 @@ void RS::update(int rob_index, float result, int curr_cycle){   // function to u
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
