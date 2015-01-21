@@ -147,35 +147,35 @@ Sample Outputs
 
 #alu.config
                  # of rs      Cycles in EX     Cycles in Mem         # of FUs
-Integer adder      5                1                                   1
+Integer adder      3                1                                   1
 FP adder           3                3                                   1
 FP multiplier      2                20                                  1
 Load/store unit    3                1               4                   1
 #mem.ini
 ROB entries = 128
-R1=10, R2=20, R3=2, F2=30.1, F3=2, F4=1.1, F1=3.2
+R1=40, R2=20, R3=2, R4=20, R5=0, F2=30.1, F3=2, F4=1.1, F1=3.2
 Mem[26]=1, Mem[8]=2, Mem[18]=3.4
 #assembly
-Sub R1, R1, R3
-Add.d F5, F2, F4
-Mult.d F5, F4, F1
-Addi R5, R2, 5
-Add F6, F5, F4
+sd F4, 16(R3)
+ld F5, -2(R2)
+add.d F5, F2, F5
 
-The result of our simulation time table and non-zero registers are as below:
-
+The result of our simulation time table and non-zero registers and MEMs are as below:
 
 	     ----------------------- Timing Table -----------------------------
-INSTRUCTIONS       ISSUE        EXEC(BEG)     EXEC(END)     MEM(BEG)     MEM(END) WB    COMMIT
-Sub R1, R1, R3       0      	     1            1      	--           --      	2       3
-Add.d F5, F2, F4     1      	     2            4      	--           --      	6       7
-Mult.d F5, F4, F1    2      	     3            22      	--           --      	23      24
-Addi R5, R2, 5       3      	     4            4      	--           --      	5       25
+INSTRUCTIONS       ISSUE        EXEC(BEG)     EXEC(END)     MEM(BEG)     MEM(END)       WB     COMMIT
+Sd F4, 16 (R3)        0      	     1            1      	  --           --           --       7
+Ld F5, -2 (R2)        1      	     2            2      	   3            3           4        8
+Add.d F5, F2, F5      2      	     5            7           --           --           8        9
 
 
+	
 	     ----------------------- Registers -----------------------------
-R[1]8	R[2]20	R[3]2	R[5]25
+R[1]40	R[2]20	R[3]2	R[4]20
 
-F[1]3.2	F[2]30.1	F[3]2	F[4]1.1	F[5]3.52
+F[1]3.2	F[2]30.1	F[3]2	F[4]1.1	F[5]33.5
 
 
+
+	     ----------------------- Data Mem -----------------------------
+D_MEM[32]2	D_MEM[72]1.1	D_MEM[104]1	
