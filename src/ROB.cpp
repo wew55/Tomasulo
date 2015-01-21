@@ -118,10 +118,10 @@ int ROB::commit_and_return(int t_cycle, int _st_update, float _st_update_value){
 		if (rob_vect[commit_pos].finished){
 
 			if ((rob_vect[commit_pos].finish_cycle)==(t_cycle-5)){  // 1 extra cycle to go from WB to commit stage
-                c_pos=commit_pos;
-                D_MEM[_st_update] = _st_update_value;
-                rob_vect[commit_pos].committed=true;
-                commit_pos++;
+                		c_pos=commit_pos;
+        			D_MEM[_st_update] = _st_update_value;
+                		rob_vect[commit_pos].committed=true;
+                		commit_pos++;
 			}
 		}
 	}
@@ -170,40 +170,4 @@ for (int i=0;i<entry_count; i++){
         <<rob_vect[i].committed<<"	ROB finish cycle:"<<rob_vect[i].finish_cycle<< std::endl;
 }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
