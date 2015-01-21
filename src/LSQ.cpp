@@ -54,7 +54,7 @@ void LD_ST_QUEUE::add_entry(int_vec_t int_rat, int_vec_t fp_rat, int_vec_t int_a
 	int actual_source2=i_entry.source_reg_right;
 	temp.val2_ready_cycle=-1;
 	temp.st_rob_pos=-1;
-    temp.inst_index = _inst_index;
+    	temp.inst_index = _inst_index;
     	temp.fwd_match=false;
     if(i_entry.inst_type == LD){ // if the instruction is a LD
 
@@ -203,9 +203,9 @@ void LD_ST_QUEUE::mem(int curr_cycle){
     for(int i=0;i<entry_count;i++){
         if(lsq[i].type == ST &&lsq[i].rob_dest == -1 &&lsq[i].tag2 == -1 && ((i==0 && (lsq[i].val2_ready_cycle +1) < curr_cycle) ||
                 (i!=0 && lsq[i].val2_ready_cycle <curr_cycle ))) {
-            //D_MEM[lsq[i].addr] = lsq[i].result;
-            st_update = lsq[i].addr;
-            st_update_value = lsq[i].result;
+        	 //D_MEM[lsq[i].addr] = lsq[i].result;
+        	  st_update = lsq[i].addr;
+        	  st_update_value = lsq[i].result;
 
             if(lsq[i].penalty == 0){
 		lsq[i].commit_ready = true;
@@ -227,7 +227,7 @@ void LD_ST_QUEUE::mem(int curr_cycle){
                     if(lsq[i].addr == lsq[k].addr && lsq[k].type == ST){
                         lsq[i].result = lsq[k].result;
                         forward_match = true;
-			            lsq[i].fwd_match=true;
+			lsq[i].fwd_match=true;
                         break;
                     }
                 }
@@ -278,9 +278,9 @@ bool LD_ST_QUEUE::lsq_wb_check(){
 	for (int i=0; i<entry_count; i++){
 
 		if (lsq[i].commit_ready==true){ //&& lsq[i].committed==false){
-            ret_value=true;
-            wb_inst_index=lsq[i].inst_index;
-            mem_occupy = false;
+            		ret_value=true;
+        		wb_inst_index=lsq[i].inst_index;
+            		mem_occupy = false;
 		}
 	}
 
@@ -291,13 +291,13 @@ int LD_ST_QUEUE::write_back_rob(){
 	    for(int i=0;i<entry_count;i++){
 
         if(lsq[i].type == LD && lsq[i].commit_ready == true && lsq[i].committed == false){
-                pos=i;
-            return lsq[i].rob_dest;
+        	pos=i;
+            	return lsq[i].rob_dest;
         }
 
 	if(lsq[i].type == ST && lsq[i].commit_ready == true && lsq[i].committed == false){
-            pos=i;
-            return lsq[i].st_rob_pos;
+            	pos=i;
+            	return lsq[i].st_rob_pos;
 	}
     }
     return -1;
@@ -309,7 +309,7 @@ float LD_ST_QUEUE::write_back_result(){
     for(int i=0;i<entry_count;i++){
         if(lsq[i].type == LD && lsq[i].commit_ready == true && lsq[i].committed == false){
 	        pos=i;
-        return lsq[i].result;
+        	return lsq[i].result;
         }
     }
     return -1;
@@ -325,7 +325,7 @@ void LD_ST_QUEUE::commit(int rob_pos){
 
 void LD_ST_QUEUE::delete_entry(){
 
-		if (pos!=-1  ){//&& lsq[pos].type==LD){
+		if (pos!=-1){//&& lsq[pos].type==LD){
 
 	//lsq.erase(lsq.begin()+pos);
     for (int i=pos; i<(entry_count-1); i++){
