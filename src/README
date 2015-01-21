@@ -164,8 +164,8 @@ The result of our simulation time table and non-zero registers and MEMs are as b
 
 	     ----------------------- Timing Table -----------------------------
 INSTRUCTIONS       ISSUE        EXEC(BEG)     EXEC(END)     MEM(BEG)     MEM(END)       WB     COMMIT
-Sd F4, 16 (R3)        0      	     1            1      	  --           --           --       7
-Ld F5, -2 (R2)        1      	     2            2      	   3            3           4        8
+Sd F4, 16 (R3)        0      	     1            1           --           --           --       7
+Ld F5, -2 (R2)        1      	     2            2            3            3           4        8
 Add.d F5, F2, F5      2      	     5            7           --           --           8        9
 
 
