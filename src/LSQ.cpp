@@ -30,8 +30,8 @@ LD_ST_QUEUE::LD_ST_QUEUE(int _qsize) // constructor, sets the size  of the LD/ST
     qsize=_qsize;
     lsq.resize(_qsize);
     pos = -1;
-	entry_count=0;
-	mem_occupy = false;
+    entry_count=0;
+    mem_occupy = false;
     st_update = 0;
     st_update_value = 0;
 
@@ -81,8 +81,8 @@ void LD_ST_QUEUE::add_entry(int_vec_t int_rat, int_vec_t fp_rat, int_vec_t int_a
     temp.penalty_assigned=false;
     temp.addr_calc = false;
     temp.mem_access=false;
-	lsq[entry_count]=temp;
-	entry_count++;
+    lsq[entry_count]=temp;
+    entry_count++;
     }
     else{//if ST
 
@@ -112,9 +112,9 @@ void LD_ST_QUEUE::add_entry(int_vec_t int_rat, int_vec_t fp_rat, int_vec_t int_a
     temp.penalty_assigned=false;
     temp.addr_calc = false;
     temp.mem_access=false;
-	lsq[entry_count]=temp;
+    lsq[entry_count]=temp;
 
-	entry_count++;
+    entry_count++;
 
     }
 
@@ -169,24 +169,25 @@ int LD_ST_QUEUE::execute(int curr_cycle){    // this function returns if there i
 	for (int i=0; i<entry_count; i++){
         if(lsq[i].type == LD){
 
-		if ((lsq[i].tag2)==-1 && (lsq[i].val2_ready_cycle < curr_cycle) && lsq[i].addr_calc == false){
+            if ((lsq[i].tag2)==-1 && (lsq[i].val2_ready_cycle < curr_cycle) && lsq[i].addr_calc == false){
             //address calculation begins
             lsq[i].addr = lsq[i].offset + lsq[i].value2;
-	        lsq[i].addr_calc = true;
+            lsq[i].addr_calc = true;
             return lsq[i].inst_index;//return executed inst index
-			//break;//only one addr calculation per cycle;
+            //break;//only one addr calculation per cycle;
 		}
 
         }
         if(lsq[i].type == ST){
-		if ((lsq[i].tag2)==-1 && (lsq[i].val2_ready_cycle < curr_cycle && lsq[i].addr_calc == false)){ //&& lsq[i].rob_dest == -1){ //&& lsq[i].val2_ready_cycle < curr_cycle){
+
+            if ((lsq[i].tag2)==-1 && (lsq[i].val2_ready_cycle < curr_cycle && lsq[i].addr_calc == false)){ //&& lsq[i].rob_dest == -1){ //&& lsq[i].val2_ready_cycle < curr_cycle){
             //address calculation begins
             lsq[i].addr = lsq[i].offset + lsq[i].value2;
             lsq[i].forward_ready = true;
 
-	        lsq[i].addr_calc = true;
+            lsq[i].addr_calc = true;
             return lsq[i].inst_index;//return executed inst index
-			//break;//only one addr calculation per cycle;
+            //break;//only one addr calculation per cycle;
 		}
 
         }
@@ -277,8 +278,8 @@ bool LD_ST_QUEUE::lsq_wb_check(){
 	for (int i=0; i<entry_count; i++){
 
 		if (lsq[i].commit_ready==true){ //&& lsq[i].committed==false){
-			ret_value=true;
-			wb_inst_index=lsq[i].inst_index;
+            ret_value=true;
+            wb_inst_index=lsq[i].inst_index;
             mem_occupy = false;
 		}
 	}
@@ -291,12 +292,12 @@ int LD_ST_QUEUE::write_back_rob(){
 
         if(lsq[i].type == LD && lsq[i].commit_ready == true && lsq[i].committed == false){
                 pos=i;
-	return lsq[i].rob_dest;
+            return lsq[i].rob_dest;
         }
 
 	if(lsq[i].type == ST && lsq[i].commit_ready == true && lsq[i].committed == false){
-		pos=i;
-	return lsq[i].st_rob_pos;
+            pos=i;
+            return lsq[i].st_rob_pos;
 	}
     }
     return -1;

@@ -49,12 +49,12 @@ void ROB::add_entry(int PC, int inst_num){
 		temp.finish_cycle=-1;
 		INSType i_temp=inst_entry.inst_type;
 		temp.i_type=i_temp;
-			if ((i_temp==LD)||(i_temp==ST)||(i_temp==FLOAT_ADD)||(i_temp==FLOAT_MUL))
-				temp.rob_type=F;
-			else if ((i_temp==INT_ADD)||(i_temp==I_ADD))
-				temp.rob_type=I;
-			else
-				temp.rob_type=NAR;
+		if ((i_temp==LD)||(i_temp==ST)||(i_temp==FLOAT_ADD)||(i_temp==FLOAT_MUL))
+			temp.rob_type=F;
+		else if ((i_temp==INT_ADD)||(i_temp==I_ADD))
+			temp.rob_type=I;
+		else
+			temp.rob_type=NAR;
 
 		rob_vect[entry_count]= temp;
 
@@ -118,10 +118,10 @@ int ROB::commit_and_return(int t_cycle, int _st_update, float _st_update_value){
 		if (rob_vect[commit_pos].finished){
 
 			if ((rob_vect[commit_pos].finish_cycle)==(t_cycle-5)){  // 1 extra cycle to go from WB to commit stage
-				c_pos=commit_pos;
+                c_pos=commit_pos;
                 D_MEM[_st_update] = _st_update_value;
-				rob_vect[commit_pos].committed=true;
-				commit_pos++;
+                rob_vect[commit_pos].committed=true;
+                commit_pos++;
 			}
 		}
 	}

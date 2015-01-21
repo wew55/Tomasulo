@@ -138,7 +138,7 @@ Makefile, and the output executable file is named as “tomasolu” in the ./bin
 3.	In the folder of source code, run the ./bin/tomasulo <inputfile>, 
 the <inputfile> is the inputfile including the initialized configuration and assembly codes.
 
-4.	Testcases are located in source code folders.
+4.	Testcases are located in the folder of testcases.
 
 5.	The output instruction timing will be on the screen.
 

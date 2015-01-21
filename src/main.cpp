@@ -119,7 +119,6 @@ int main(int argc, char* argv[])
 
 
         //issue begins here:
-	std::cout<<"PC value:"<<PC<<std::endl;
         //BR control
 
 if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check_clear()) || ((I_MEM[PC+1].inst_type == I_ADD)&& int_add_rs.check_clear())
@@ -229,7 +228,7 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
             }
             if(fp_add_rs.push_ready(current_cycle)){
                 fp_add_fu.add_fp_entry(fp_add_rs.get_inst_name(), fp_add_rs.get_inst_robdest(),
-                        fp_add_rs.get_value1(),  fp_add_rs.get_value2(), (current_cycle), fp_add_rs.get_inst_num() , configuration);//:
+                        fp_add_rs.get_value1(),  fp_add_rs.get_value2(), (current_cycle), fp_add_rs.get_inst_num() , configuration);
 
 		        pr.exec_begin(fp_add_rs.get_inst_num(), current_cycle);
                 fp_add_rs.del_entry_pushed();
@@ -237,7 +236,7 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
             }
             if(fp_mul_rs.push_ready(current_cycle)){
                 fp_mul_fu.add_fp_entry(fp_mul_rs.get_inst_name(), fp_mul_rs.get_inst_robdest(),
-                        fp_mul_rs.get_value1(),fp_mul_rs.get_value2(), (current_cycle), fp_mul_rs.get_inst_num() , configuration);//:
+                        fp_mul_rs.get_value1(),fp_mul_rs.get_value2(), (current_cycle), fp_mul_rs.get_inst_num() , configuration);
 
 		        pr.exec_begin(fp_mul_rs.get_inst_num(), current_cycle);
 		        fp_mul_rs.del_entry_pushed();
@@ -264,24 +263,24 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
 
             if(lsq.lsq_wb_check()){
                 cdb.push_to_cdb(lsq.write_back_rob(), lsq.write_back_result(), lsq.get_inst_index());
-		    pr.mem(lsq.get_inst_index(), current_cycle, lsq.get_fwd_match(), configuration.mem_cycle_of_ldst);
-		    lsq.delete_entry();
+		        pr.mem(lsq.get_inst_index(), current_cycle, lsq.get_fwd_match(), configuration.mem_cycle_of_ldst);
+		        lsq.delete_entry();
             }
 
             if(int_add_fu.check_wb()){
                 cdb.push_to_cdb(int_add_fu.wb_rob_index_rq(), (float)int_add_fu.wb_int_rq(), int_add_fu.get_inst_index());
-		    pr.exec_end(int_add_fu.get_inst_index(), current_cycle);
-		    int_add_fu.fu_pop();
+		        pr.exec_end(int_add_fu.get_inst_index(), current_cycle);
+		        int_add_fu.fu_pop();
             }
             if(fp_add_fu.check_wb()){
                 cdb.push_to_cdb(fp_add_fu.wb_rob_index_rq(), fp_add_fu.wb_fp_rq(), fp_add_fu.get_inst_index());
-		    pr.exec_end(fp_add_fu.get_inst_index(), current_cycle);
-		    fp_add_fu.fu_pop();
+		        pr.exec_end(fp_add_fu.get_inst_index(), current_cycle);
+		        fp_add_fu.fu_pop();
             }
             if(fp_mul_fu.check_wb()){
                 cdb.push_to_cdb(fp_mul_fu.wb_rob_index_rq(), fp_mul_fu.wb_fp_rq(), fp_mul_fu.get_inst_index());
-		    pr.exec_end(fp_mul_fu.get_inst_index(), current_cycle);
-		    fp_mul_fu.fu_pop();
+		        pr.exec_end(fp_mul_fu.get_inst_index(), current_cycle);
+		        fp_mul_fu.fu_pop();
             }
 
 
@@ -327,8 +326,8 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
 
 	        if(rob_commit_pos!=-1){
 
-	        //	br.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
-	        //	int_add_rs.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
+	        //  br.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
+	        //  int_add_rs.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
             //  fp_add_rs.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
             //  fp_mul_rs.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
             //  lsq.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
