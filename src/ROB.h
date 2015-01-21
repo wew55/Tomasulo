@@ -41,16 +41,16 @@ class ROB{
         void modify_value(int pos, float value, int t_cycle);  // updates the result field of the entry at 'pos', with 'value
         //void modify_finished();
         bool rob_pos_clear(int pos); // returns whether a particular entry in ROB is filled or can be written
-	    bool clear_check(); // return true if the ROB is not completely full
-	    int commit_and_return(int t_cycle, int, float); // returns the ROB index of the ROB entry getting commited, if there is any commit. ELSE return -1.
-	    float get_result(int r_index); // returns the calculated result from a given rob_index
-	    int get_inst_num(int r_index);
-	    ROBType get_rob_type(int r_index);	// returns the rob_type (Integer or floating point) of the instruction at index=r_index
-	    void print();
+	bool clear_check(); // return true if the ROB is not completely full
+	int commit_and_return(int t_cycle, int, float); // returns the ROB index of the ROB entry getting commited, if there is any commit. ELSE return -1.
+	float get_result(int r_index); // returns the calculated result from a given rob_index
+	int get_inst_num(int r_index);
+	ROBType get_rob_type(int r_index);	// returns the rob_type (Integer or floating point) of the instruction at index=r_index
+	void print();
         int ret_entry_num();
         bool get_finished(int);
     private:
-	    struct rob_entry{		// structure for each ROB entry
+    	struct rob_entry{		// structure for each ROB entry
 		    int instr_num;
 		    int rob_entry_num; // rob_entry_number, used for register-renaming in RAT
 		    ROBType rob_type;  // tells whether instruction is Integer, Float or Non-Arithmetic type
@@ -62,13 +62,11 @@ class ROB{
 		    int finish_cycle;  // records the time when the instruction is finished, used for adding the 4 cycle delay in commit for STORE
 
 	};
-
-	    std::vector<rob_entry> rob_vect; // vector or ROB entry structures
+	std::vector<rob_entry> rob_vect; // vector or ROB entry structures
         int rob_capacity;  // stores the total ROB capacity
-	    bool complete_fill_once; // indicates whether the ROB has been completely filled once or nor
-	    int entry_count;  // keeping track of which position in ROB to enter the next entry
+	bool complete_fill_once; // indicates whether the ROB has been completely filled once or nor
+	int entry_count;  // keeping track of which position in ROB to enter the next entry
     	int commit_pos; // keeps the index of last committed position
-
 
 };
 
