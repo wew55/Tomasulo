@@ -69,8 +69,8 @@ class RS{
     	    std::vector<rs_entry> rs_vector;
 
             int rs_capacity;
-        	int entry_count;
-        	int push_pos;
+            int entry_count;
+            int push_pos;
        };
 
 #endif
