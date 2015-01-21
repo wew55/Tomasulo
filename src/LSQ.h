@@ -38,24 +38,22 @@ class LD_ST_QUEUE{
     private:
         struct LSQ_entry{
             INSType type;
-		    int rob_dest;
-		    float result;
+            int rob_dest;
+            float result;
             int inst_index;
-
-		    int tag2;
-		    float value2;
-		    int offset;
+            int tag2;
+            float value2;
+            int offset;
             int addr;
             int penalty;
-	        int val2_ready_cycle;
-	        int st_rob_pos;
-
-		    bool forward_ready;// forward ready only used for "S" type;
-	        bool fwd_match;
+            int val2_ready_cycle;
+            int st_rob_pos;
+            bool forward_ready;// forward ready only used for "S" type;
+            bool fwd_match;
             bool commit_ready;
             bool committed;
-	        bool addr_calc;
-	    	bool penalty_assigned;
+            bool addr_calc;
+            bool penalty_assigned;
             bool mem_access;
       };
 
