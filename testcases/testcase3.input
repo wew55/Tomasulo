@@ -1,0 +1,15 @@
+#alu.config
+                 # of rs      Cycles in EX     Cycles in Mem         # of FUs
+Integer adder      2                1                                   1
+FP adder           3                3                                   1
+FP multiplier      2                20                                  1
+Load/store unit    3                1               4                   1
+#mem.ini
+ROB entries = 128
+R1=20, R2=20, R3=2, R4=20, R5=5, F2=30.1, F3=2, F4=1.1, F1=3.2
+Mem[26]=1, Mem[8]=2, Mem[18]=3.4
+#assembly
+addi R2, R2, 10
+addi R5, R5, 5
+mult.d F4, F5, F2
+bne R1, R5, -3
