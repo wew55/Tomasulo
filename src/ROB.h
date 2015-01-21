@@ -54,7 +54,7 @@ class ROB{
 		    int instr_num;
 		    int rob_entry_num; // rob_entry_number, used for register-renaming in RAT
 		    ROBType rob_type;  // tells whether instruction is Integer, Float or Non-Arithmetic type
-                INSType i_type;
+		    INSType i_type;
 		    int dst;	   // actual destination in ARF
 		    float result;	   // stores result of the instruction
 		    bool finished;     // tells whether the instruction is finished and ready to be committed
