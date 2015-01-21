@@ -100,9 +100,8 @@ int main(int argc, char* argv[])
     int tot_inst = I_MEM.size();
     int left_inst = I_MEM.size();
     bool prog_end=false;
-	bool br_flag=false;
-
-	int i_num=-1;
+    bool br_flag=false;
+    int i_num=-1;
 
     //single-cycle pipeline, each iteration for one cycle.
 
@@ -177,7 +176,7 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
         }
         else{
 		if (I_MEM.at(PC).inst_type != ST && I_MEM.at(PC).inst_type != BR)   // If it is a store , there is no register renaming
-            fp_rat.rat_update(I_MEM.at(PC).dest_reg, rob.modify_dst());}
+         	fp_rat.rat_update(I_MEM.at(PC).dest_reg, rob.modify_dst());}
 
         }
 
@@ -223,7 +222,7 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
                         (int) int_add_rs.get_value1(), (int)  int_add_rs.get_value2(), (current_cycle), int_add_rs.get_inst_num(), configuration);
 
 		        pr.exec_begin(int_add_rs.get_inst_num(), current_cycle);
-                int_add_rs.del_entry_pushed();
+                	int_add_rs.del_entry_pushed();
 
             }
             if(fp_add_rs.push_ready(current_cycle)){
@@ -231,7 +230,7 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
                         fp_add_rs.get_value1(),  fp_add_rs.get_value2(), (current_cycle), fp_add_rs.get_inst_num() , configuration);
 
 		        pr.exec_begin(fp_add_rs.get_inst_num(), current_cycle);
-                fp_add_rs.del_entry_pushed();
+                	fp_add_rs.del_entry_pushed();
 
             }
             if(fp_mul_rs.push_ready(current_cycle)){
@@ -263,24 +262,24 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
 
             if(lsq.lsq_wb_check()){
                 cdb.push_to_cdb(lsq.write_back_rob(), lsq.write_back_result(), lsq.get_inst_index());
-		        pr.mem(lsq.get_inst_index(), current_cycle, lsq.get_fwd_match(), configuration.mem_cycle_of_ldst);
-		        lsq.delete_entry();
+		pr.mem(lsq.get_inst_index(), current_cycle, lsq.get_fwd_match(), configuration.mem_cycle_of_ldst);
+		lsq.delete_entry();
             }
 
             if(int_add_fu.check_wb()){
                 cdb.push_to_cdb(int_add_fu.wb_rob_index_rq(), (float)int_add_fu.wb_int_rq(), int_add_fu.get_inst_index());
-		        pr.exec_end(int_add_fu.get_inst_index(), current_cycle);
-		        int_add_fu.fu_pop();
+		pr.exec_end(int_add_fu.get_inst_index(), current_cycle);
+		int_add_fu.fu_pop();
             }
             if(fp_add_fu.check_wb()){
                 cdb.push_to_cdb(fp_add_fu.wb_rob_index_rq(), fp_add_fu.wb_fp_rq(), fp_add_fu.get_inst_index());
-		        pr.exec_end(fp_add_fu.get_inst_index(), current_cycle);
-		        fp_add_fu.fu_pop();
+		pr.exec_end(fp_add_fu.get_inst_index(), current_cycle);
+		fp_add_fu.fu_pop();
             }
             if(fp_mul_fu.check_wb()){
                 cdb.push_to_cdb(fp_mul_fu.wb_rob_index_rq(), fp_mul_fu.wb_fp_rq(), fp_mul_fu.get_inst_index());
-		        pr.exec_end(fp_mul_fu.get_inst_index(), current_cycle);
-		        fp_mul_fu.fu_pop();
+		pr.exec_end(fp_mul_fu.get_inst_index(), current_cycle);
+		fp_mul_fu.fu_pop();
             }
 
 
@@ -290,10 +289,10 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
                     if (rob.get_finished(k)== true){
 
 		        br.update(k, rob.get_result(k), current_cycle);
-                int_add_rs.update(k, rob.get_result(k), current_cycle);
-                fp_add_rs.update(k, rob.get_result(k), current_cycle);
-                fp_mul_rs.update(k, rob.get_result(k), current_cycle);
-                lsq.update(k, rob.get_result(k), current_cycle);
+                	int_add_rs.update(k, rob.get_result(k), current_cycle);
+                	fp_add_rs.update(k, rob.get_result(k), current_cycle);
+                	fp_mul_rs.update(k, rob.get_result(k), current_cycle);
+                	lsq.update(k, rob.get_result(k), current_cycle);
                     }
                 }
 
@@ -308,10 +307,10 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
                     if (rob.get_finished(k)== true){
 
 		        br.update(k, rob.get_result(k), current_cycle);
-                int_add_rs.update(k, rob.get_result(k), current_cycle);
-                fp_add_rs.update(k, rob.get_result(k), current_cycle);
-                fp_mul_rs.update(k, rob.get_result(k), current_cycle);
-                lsq.update(k, rob.get_result(k), current_cycle);
+                	int_add_rs.update(k, rob.get_result(k), current_cycle);
+                	fp_add_rs.update(k, rob.get_result(k), current_cycle);
+                	fp_mul_rs.update(k, rob.get_result(k), current_cycle);
+	                lsq.update(k, rob.get_result(k), current_cycle);
                     }
                 }
 
@@ -333,15 +332,15 @@ if (rob.clear_check() && (((I_MEM[PC+1].inst_type == INT_ADD)&& int_add_rs.check
             //  lsq.update(rob_commit_pos, rob.get_result(rob_commit_pos), current_cycle);
 
 	        pr.commit(rob.get_inst_num(rob_commit_pos), current_cycle);
-            int int_true_dest = int_rat.rat_release(rob_commit_pos);
-            int fp_true_dest = fp_rat.rat_release(rob_commit_pos);
+            	int int_true_dest = int_rat.rat_release(rob_commit_pos);
+            	int fp_true_dest = fp_rat.rat_release(rob_commit_pos);
 
-            if(int_true_dest!=-1)
-                arf.commit(rob.get_result(rob_commit_pos),int_true_dest, rob.get_rob_type(rob_commit_pos));
-            if(fp_true_dest!=-1)
-                arf.commit(rob.get_result(rob_commit_pos),fp_true_dest, rob.get_rob_type(rob_commit_pos));
+            	if(int_true_dest!=-1)
+                	arf.commit(rob.get_result(rob_commit_pos),int_true_dest, rob.get_rob_type(rob_commit_pos));
+            	if(fp_true_dest!=-1)
+                	arf.commit(rob.get_result(rob_commit_pos),fp_true_dest, rob.get_rob_type(rob_commit_pos));
 
-            num_commits++;
+            	num_commits++;
 
 	        if (num_commits == tot_inst)
 		        prog_end=true;
